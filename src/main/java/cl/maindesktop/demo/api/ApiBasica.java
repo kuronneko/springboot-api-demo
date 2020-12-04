@@ -2,7 +2,9 @@ package cl.maindesktop.demo.api;
 
 
 import cl.maindesktop.demo.component.HelloComponent;
+import cl.maindesktop.demo.entity.Links;
 import cl.maindesktop.demo.model.Tarea;
+import cl.maindesktop.demo.service.ServicioLinks;
 import cl.maindesktop.demo.service.ServicioTarea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping(path = "/api")
 //http://localhost:8080/api
 
+
 public class ApiBasica {
 
     @Autowired
@@ -27,6 +30,30 @@ public class ApiBasica {
     private ServicioTarea service;
 
 
+    @Autowired
+    @Qualifier("servicioLinks")
+    private ServicioLinks servicioLinks;
+
+    // ------ CRUD LINKS --------------
+
+    @GetMapping("/links")
+    public List<Links> links(){
+        return servicioLinks.getLinks();
+    }
+
+    @GetMapping("/links/{id}")
+    public Links buscarLink(@PathVariable String id){
+        return servicioLinks.buscarLink(Integer.parseInt(id));
+    }
+
+    @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String create(@RequestBody Links links){
+        servicioLinks.insertarLinks(links);
+        return "Ok";
+    }
+
+
+    // -------- EJEMPLOS DE RECURSOS
     @GetMapping("/hello")
     public String hello(){
         return component.saludo();
