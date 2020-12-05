@@ -35,4 +35,25 @@ public class ServicioLinksImpl implements ServicioLinks {
         }
         return null;
     }
+
+    @Override
+    public List<Links> buscarLinksPuntuacionMenorA(int valor) {
+        return crud.findByPuntuacionLessThan(valor);
+    }
+
+    @Override
+    public List<Links> buscarLinksEntre(int start, int end) {
+        return crud.findByPuntuacionBetween(start, end);
+
+    }
+
+    @Override
+    public List<Links> buscarLinksMenorAVersionNativa(int valor) {
+        return crud.buscarPorValorMenorANative(valor);
+    }
+
+    @Override
+    public List<Links> buscarLinksMenorAVersionJQL(int valor) {
+        return crud.buscarPorValorMenorAJQL(valor);
+    }
 }

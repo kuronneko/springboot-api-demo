@@ -10,4 +10,9 @@ public interface ServicioLinks {
     void insertarLinks(Links links);
     List<Links> getLinks();
     Links buscarLink(int id);
+    List<Links> buscarLinksPuntuacionMenorA(int valor);
+    List<Links> buscarLinksEntre(int start, int end);
+
+    List<Links> buscarLinksMenorAVersionNativa(int valor);
+    List<Links> buscarLinksMenorAVersionJQL(int valor);
 }
